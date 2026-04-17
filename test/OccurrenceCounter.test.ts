@@ -232,6 +232,20 @@ describe('OccurrenceCounter: UTF-8 byte input', () =>
     expect(counter.count('\uFFFD')).toBeGreaterThanOrEqual(1);
   });
 
+  // Spec: "A BOM at the start of the first chunk is NOT stripped".
+  test('leading UTF-8 BOM is not stripped and appendBytes matches appendString', () =>
+  {
+    const bomAndFoo = new Uint8Array([0xef, 0xbb, 0xbf, 0x66, 0x6f, 0x6f]);
+
+    const byteCounter = new OccurrenceCounter(['\uFEFFfoo']);
+    byteCounter.appendBytes(bomAndFoo);
+    expect(byteCounter.count('\uFEFFfoo')).toBe(1);
+
+    const stringCounter = new OccurrenceCounter(['\uFEFFfoo']);
+    stringCounter.appendString('\uFEFFfoo');
+    expect(stringCounter.count('\uFEFFfoo')).toBe(1);
+  });
+
   // 23. Mixed appendBytes and appendString contribute to cumulative counts.
   test('mixed appendBytes and appendString contribute cumulatively', () =>
   {

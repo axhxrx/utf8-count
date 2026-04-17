@@ -22,7 +22,11 @@ export class Utf8ChunkDecoder
 
   static #makeDecoder(): TextDecoder
   {
-    return new TextDecoder('utf-8', { fatal: false, ignoreBOM: false });
+    // `ignoreBOM: true` preserves an initial U+FEFF as a normal codepoint in
+    // the output, per the spec's requirement that a leading BOM be fed into
+    // the matcher like any other character. With `ignoreBOM: false` the
+    // decoder strips the BOM — the opposite of what the name suggests.
+    return new TextDecoder('utf-8', { fatal: false, ignoreBOM: true });
   }
 
   /**

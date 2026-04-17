@@ -57,4 +57,22 @@ describe('Utf8ChunkDecoder', () =>
     // After reset, a new valid ASCII byte decodes cleanly.
     expect(decoder.decode(new Uint8Array([0x41]))).toBe('A');
   });
+
+  test('preserves a leading UTF-8 BOM as U+FEFF', () =>
+  {
+    const decoder = new Utf8ChunkDecoder();
+    // EF BB BF = U+FEFF BOM, then ASCII "hi".
+    const out = decoder.decode(new Uint8Array([0xef, 0xbb, 0xbf, 0x68, 0x69]));
+    expect(out).toBe('\uFEFFhi');
+  });
+
+  test('preserves the BOM again after end() recreates the decoder', () =>
+  {
+    const decoder = new Utf8ChunkDecoder();
+    decoder.decode(new Uint8Array([0xef, 0xbb, 0xbf, 0x61]));
+    decoder.end();
+    // After reset, a subsequent BOM must also be preserved, not silently eaten.
+    const out = decoder.decode(new Uint8Array([0xef, 0xbb, 0xbf, 0x62]));
+    expect(out).toBe('\uFEFFb');
+  });
 });

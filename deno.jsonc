@@ -21,7 +21,10 @@
       "package.json",
       "tsconfig.json",
       "dprint.jsonc",
+      ".cursor",
+      ".git",
       ".npmrc",
+      ".railgun",
       "CLAUDE.md"
     ]
   }

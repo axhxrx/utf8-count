@@ -1,10 +1,31 @@
 {
   "name": "@axhxrx/utf8-stream-occurrences",
-  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
   "devDependencies": {
+    "@std/assert": "npm:@jsr/std__assert",
+    "@std/expect": "npm:@jsr/std__expect",
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "SPEC.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "deno check && bun tsc --noEmit && dprint check",
+    "fix": "dprint fmt",
+    "test": "bun test && deno test -A"
   }
 }

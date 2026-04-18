@@ -46,3 +46,11 @@ README.md: 940 bytes in 1 chunk (1.08 ms, caseSensitive=true)
 bun test
 deno test -A
 ```
+
+## Runtimes
+
+Deno, Bun, Node 24.2+
+
+## License
+
+MIT

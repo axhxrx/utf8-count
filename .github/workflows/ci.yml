@@ -1,0 +1,65 @@
+name: CI + Publish (if needed)
+on:
+  push:
+    branches: ["*"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: deno install
+
+      - run: bun install
+
+      - run: bun run check
+
+      - run: bun run test
+
+  # Only run if we're on main and the test job succeeded:
+  publish:
+    needs: [test]
+    runs-on: ubuntu-latest
+    if: ${{ success() && startsWith(github.ref, 'refs/heads/main') }}
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install dependencies
+        run: deno install
+
+      - name: "Publish package (if new version exists)"
+        run: |
+          set +e
+          publish_output="$(npx jsr publish --allow-dirty 2>&1)"
+          publish_status=$?
+          set -e
+
+          printf '%s\n' "$publish_output"
+
+          if [ $publish_status -eq 0 ]; then
+            exit 0
+          fi
+
+          exit $publish_status

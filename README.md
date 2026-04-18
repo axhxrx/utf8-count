@@ -1,6 +1,6 @@
 # @axhxrx/utf8-count
 
-Count occurrences of registered string patterns in a chunked UTF-8 byte stream (or chunked JS string stream) using bounded memory.
+Count occurrences of registered string patterns in a chunked UTF-8 byte stream (or JS string series) using minimal memory.
 
 See [SPEC.md](./SPEC.md) for the full specification.
 
@@ -20,7 +20,9 @@ bunx jsr add @axhxrx/utf8-count
 import { OccurrenceCounter } from '@axhxrx/utf8-count'
 
 const counter = new OccurrenceCounter(['hello', 'world'])
-counter.appendString('hello world, hello again')
+counter.appendString('hello wor');
+counter.appendString('ld, hell');
+counter.appendString('o again')
 counter.count('hello') // 2
 counter.count('world') // 1
 
@@ -32,13 +34,26 @@ c.count('café') // 1
 ```
 
 # CLI
-./bin/count.ts README.md count byte count string
-README.md: 940 bytes in 1 chunk (1.08 ms, caseSensitive=true)
-  "count"   7
-  "byte"    4
-  "count"   7
-  "string"  2
 
+```
+./bin/count.ts README.md count byte count string "new Uint8Array"
+README.md: 1,485 bytes in 1 chunk (0.84 ms, caseSensitive=true)
+  "count"           20
+  "byte"            8
+  "count"           20
+  "string"          4
+  "new Uint8Array"  4
+```
+
+Or, from JSR:
+
+```
+deno run -R https://jsr.io/@axhxrx/utf8-count/0.1.0/bin/count.ts --ignore-case README.md deno bun node
+README.md: 1,366 bytes in 1 chunk (2.79 ms, caseSensitive=false)
+  "deno"  7
+  "bun"   6
+  "node"  5
+```  
 
 ## Tests
 
@@ -55,3 +70,11 @@ Deno, Bun, Node 24.2+
 ## License
 
 MIT
+
+## Happenings
+
+- 2026-04-18 🩹 0.1.1 — fix bug in README
+
+- 2026-04-18 📦 0.1.0 — initial release
+
+以上

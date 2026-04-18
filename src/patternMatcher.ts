@@ -1,10 +1,8 @@
 /**
- Count overlap-by-one occurrences of `needle` in `haystack` starting at
- `startIndex`. After a match at index `i`, the search resumes at `i + 1`,
+ Count overlap-by-one occurrences of `needle` in `haystack` starting at `startIndex`. After a match at index `i`, the search resumes at `i + 1`,
  not `i + needle.length`. So `countOccurrences('aaa', 'aa')` returns `2`.
 
- An empty needle is defined to return `1` as a convenience for callers that
- treat `""` as an always-satisfied pattern.
+ An empty needle is defined to return `1` as a convenience for callers that treat `""` as an always-satisfied pattern.
  */
 export function countOccurrences(haystack: string, needle: string, startIndex = 0): number
 {

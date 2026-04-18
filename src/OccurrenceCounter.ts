@@ -3,8 +3,7 @@ import type { OccurrenceCounterOptions } from './types/OccurrenceCounterOptions.
 import { Utf8ChunkDecoder } from './utf8ChunkDecoder.ts';
 
 /**
- Bounded pattern occurrence counter over a chunked UTF-8 byte stream or a
- chunked JS string stream.
+ Bounded pattern occurrence counter over a chunked UTF-8 byte stream or a chunked JS string stream.
 
  Usage:
 
@@ -16,18 +15,13 @@ import { Utf8ChunkDecoder } from './utf8ChunkDecoder.ts';
  counter.count('bar') // 1
  ```
 
- Memory is bounded to `O(maxPatternLength + numPatterns)`; cumulative counts
- are small integers that grow without bound but never dominate.
+ Memory is bounded to `O(maxPatternLength + numPatterns)`; cumulative counts are small integers that grow without bound but never dominate.
 
- Matching semantics are overlap-by-one: after a match at index `i`, the
- search resumes at `i + 1`. So `"aaa"` with pattern `"aa"` counts as `2`.
+ Matching semantics are overlap-by-one: after a match at index `i`, the search resumes at `i + 1`. So `"aaa"` with pattern `"aa"` counts as `2`.
 
- Case sensitivity is fixed at construction. When `caseSensitive: false`, both
- stored patterns and incoming chunks are lower-cased before matching, and the
- lookup key in `count()` is normalized the same way.
+ Case sensitivity is fixed at construction. When `caseSensitive: false`, both stored patterns and incoming chunks are lower-cased before matching, and the lookup key in `count()` is normalized the same way.
 
- The empty pattern `""` is defined to always have `count("") === 1` and
- `hasEverMatched("") === true`, regardless of input.
+ The empty pattern `""` is defined to always have `count("") === 1` and `hasEverMatched("") === true`, regardless of input.
 
  `count(pattern)` for an unregistered pattern returns `0` (no error).
  */
@@ -65,8 +59,7 @@ export class OccurrenceCounter
   }
 
   /**
-   Ingest a UTF-8 byte chunk. Partial codepoints at the end of the chunk are
-   held internally and completed by the next chunk.
+   Ingest a UTF-8 byte chunk. Partial codepoints at the end of the chunk are held internally and completed by the next chunk.
    */
   appendBytes(chunk: Uint8Array): void
   {
@@ -83,8 +76,7 @@ export class OccurrenceCounter
   }
 
   /**
-   Ingest a JS string chunk. String input is already a sequence of UTF-16
-   code units; no decoding is performed.
+   Ingest a JS string chunk. String input is already a sequence of UTF-16 code units; no decoding is performed.
    */
   appendString(chunk: string): void
   {
@@ -126,8 +118,7 @@ export class OccurrenceCounter
   /**
    Cumulative count of `pattern` across every chunk fed so far.
 
-   Returns `0` if `pattern` was not registered at construction time (except
-   for the empty string, which always returns `1`).
+   Returns `0` if `pattern` was not registered at construction time (except for the empty string, which always returns `1`).
    */
   count(pattern: string): number
   {
@@ -148,9 +139,7 @@ export class OccurrenceCounter
   }
 
   /**
-   Flush the internal UTF-8 decoder. Any pending partial codepoint is treated
-   as invalid and a replacement character is emitted into the haystack. The
-   next `appendBytes` starts a fresh decoder.
+   Flush the internal UTF-8 decoder. Any pending partial codepoint is treated as invalid and a replacement character is emitted into the haystack. The next `appendBytes` starts a fresh decoder.
 
    Has no effect on `appendString`-only usage beyond resetting the decoder.
    */
@@ -164,8 +153,7 @@ export class OccurrenceCounter
   }
 
   /**
-   Current retained tail length in characters. Not part of the stable API;
-   exposed for tests that want to assert the memory bound.
+   Current retained tail length in characters. Not part of the stable API; exposed for tests that want to assert the memory bound.
    */
   debugTailLength(): number
   {

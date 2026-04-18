@@ -25,8 +25,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "check": "deno check && bun tsc --noEmit && dprint check",
-    "fix": "dprint fmt",
-    "test": "bun test && deno test -A"
+    "check": "deno check && deno lint && bun tsc --noEmit && dprint check",
+    "fix": "dprint fmt && deno lint --fix",
+    "test": "bun test && deno test -A && node --test"
   }
 }

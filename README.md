@@ -45,6 +45,7 @@ README.md: 940 bytes in 1 chunk (1.08 ms, caseSensitive=true)
 ```bash
 bun test
 deno test -A
+node --test
 ```
 
 ## Runtimes

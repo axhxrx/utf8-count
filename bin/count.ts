@@ -2,7 +2,6 @@
 import { createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import process from 'node:process';
-import { fileURLToPath } from 'node:url';
 
 import { OccurrenceCounter } from '../src/index.ts';
 

@@ -31,6 +31,15 @@ c.appendBytes(new Uint8Array([0xa9])) // rest of 'é'
 c.count('café') // 1
 ```
 
+# CLI
+./bin/count.ts README.md count byte count string
+README.md: 940 bytes in 1 chunk (1.08 ms, caseSensitive=true)
+  "count"   7
+  "byte"    4
+  "count"   7
+  "string"  2
+
+
 ## Tests
 
 ```bash

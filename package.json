@@ -19,6 +19,7 @@
   },
   "files": [
     "src",
+    "bin",
     "README.md",
     "SPEC.md",
     "LICENSE"

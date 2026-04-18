@@ -107,7 +107,7 @@ export interface OccurrenceCounterOptions
 
 ### UTF-8 decoding
 
-- `appendBytes(chunk)` decodes `chunk` using an internal `TextDecoder('utf-8', { fatal: false, ignoreBOM: false })` in stream mode. A codepoint split across two `appendBytes` calls is correctly reassembled.
+- `appendBytes(chunk)` decodes `chunk` using an internal `TextDecoder('utf-8', { fatal: false, ignoreBOM: true })` in stream mode. A codepoint split across two `appendBytes` calls is correctly reassembled.
 - A BOM at the start of the first chunk is NOT stripped; it's treated as a normal codepoint and fed through the matcher. Callers that want to strip a BOM should do so before passing the chunk.
 - Invalid UTF-8 sequences are replaced with U+FFFD (the standard `TextDecoder` behavior when `fatal: false`). Replacement characters appear in the haystack like any other character; patterns that happen to match them will match.
 - Mixing `appendBytes` and `appendString` on the same counter is allowed, in any order. Each `appendBytes` completes its chunk independently; the stream-mode decoder is per-byte-call-chain, not affected by intervening string calls.

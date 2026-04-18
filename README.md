@@ -48,8 +48,11 @@ README.md: 1,485 bytes in 1 chunk (0.84 ms, caseSensitive=true)
 Or, from JSR:
 
 ```
-deno run -R https://jsr.io/@axhxrx/utf8-count/0.1.0/bin/count.ts --ignore-case README.md deno bun node
-README.md: 1,366 bytes in 1 chunk (2.79 ms, caseSensitive=false)
+deno run -R https://jsr.io/@axhxrx/utf8-count/0.1.0/bin/count.ts \
+  --ignore-case \
+  README.md \
+  deno bun node
+README.md: 1,600 bytes in 1 chunk (2.83 ms, caseSensitive=false)
   "deno"  7
   "bun"   6
   "node"  5
@@ -72,6 +75,8 @@ Deno, Bun, Node 24.2+
 MIT
 
 ## Happenings
+
+- 2026-04-18 💄 0.1.2 — beautify README
 
 - 2026-04-18 🩹 0.1.1 — fix bug in README
 

@@ -1,4 +1,4 @@
-# `@axhxrx/utf8-stream-occurrences` Spec
+# `@axhxrx/utf8-count` Spec
 
 Count occurrences of registered string patterns in a chunked UTF-8 byte stream (or equivalently, a chunked JS string stream) using bounded memory, and report per-pattern cumulative counts and "has-ever-matched" booleans.
 
@@ -120,7 +120,7 @@ export interface OccurrenceCounterOptions
 ## Worked examples
 
 ```ts
-import { OccurrenceCounter } from '@axhxrx/utf8-stream-occurrences';
+import { OccurrenceCounter } from '@axhxrx/utf8-count';
 
 // --- single-chunk string input ---
 const c1 = new OccurrenceCounter(['hello', 'world']);
@@ -209,7 +209,7 @@ c6.count('baz'); // 0 (not registered, not an error)
 ## File layout
 
 ```
-utf8-stream-occurrences/
+utf8-count/
   SPEC.md                        # this document
   README.md
   src/
@@ -240,7 +240,7 @@ Goal: no file exceeds ~250 lines. The main class should be well under that.
 
 ## Publishing
 
-- JSR: `@axhxrx/utf8-stream-occurrences`.
+- JSR: `@axhxrx/utf8-count`.
 - Versioning: semver, starts at `0.1.0`.
 
 ## Open design questions (resolved during implementation, not spec)

@@ -1,4 +1,4 @@
-# @axhxrx/utf8-stream-occurrences
+# @axhxrx/utf8-count
 
 Count occurrences of registered string patterns in a chunked UTF-8 byte stream (or chunked JS string stream) using bounded memory.
 
@@ -8,16 +8,16 @@ See [SPEC.md](./SPEC.md) for the full specification.
 
 ```bash
 # Deno
-deno add jsr:@axhxrx/utf8-stream-occurrences
+deno add jsr:@axhxrx/utf8-count
 
 # Bun / Node
-bunx jsr add @axhxrx/utf8-stream-occurrences
+bunx jsr add @axhxrx/utf8-count
 ```
 
 ## Quick start
 
 ```ts
-import { OccurrenceCounter } from '@axhxrx/utf8-stream-occurrences'
+import { OccurrenceCounter } from '@axhxrx/utf8-count'
 
 const counter = new OccurrenceCounter(['hello', 'world'])
 counter.appendString('hello world, hello again')
